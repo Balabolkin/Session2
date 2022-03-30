@@ -15,6 +15,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using WinUIEx;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -44,6 +45,8 @@ namespace Session2
         {
             m_window = new MainWindow();
             m_window.Activate();
+            m_window.SetWindowSize(1000, 700);
+            
         }
 
         private Window m_window;

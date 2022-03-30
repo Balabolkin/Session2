@@ -9,6 +9,6 @@ namespace Session2.Classes
 {
     internal class connection
     {
-        public static readonly string strConn = @"Data Source=BALABOLKIN-LAPT\SQLEXPRESS;Initial Catalog=Session1;Integrated Security=True";
+        public static readonly string strConn = @"Data Source=BALABOLKIN-LAPT\SQLEXPRESS;Initial Catalog=Session2;Integrated Security=True";
     }
 }

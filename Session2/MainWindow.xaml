@@ -4,10 +4,80 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Session2"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls" xmlns:converters="using:CommunityToolkit.WinUI.UI.Converters"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+    <Grid x:Name="mGrid" Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}">
+        <Grid.Resources>
+            <DataTemplate x:Key="DataViewTemplate" x:DataType="local:Table">
+                <Grid Height="Auto" Margin="4">
+                    <StackPanel MinHeight="75" Width="350" Padding="10, 0, 0, 10" Background="DarkSlateBlue" CornerRadius="{StaticResource ControlCornerRadius}">
+                        <TextBlock x:Name="TnameM" Text="{x:Bind TnameM}"/>
+                        <TextBlock x:Name="TtypeM" Text="{x:Bind TtypeM}"/>
+                        <Image x:Name="Timg" Source="{x:Bind Timg}" Height="100"/>
+                        <TextBlock x:Name="Tprice" Text="{x:Bind Tprice}"/>
+                        <TextBlock x:Name="TminStock" Text="{x:Bind TinStock}"/>
+                        <TextBlock x:Name="TminNum" Text="{x:Bind TminNum}"/>
+                        <TextBlock x:Name="TnumPack" Text="{x:Bind TnumPack}"/>
+                        <TextBlock x:Name="Tunit" Text="{x:Bind Tunit}"/>
+                        <TextBlock x:Name="TnameS" Text="{x:Bind TnameS}"/>
+                        <TextBlock x:Name="TtypeS" Text="{x:Bind TtypeS}"/>
+                        <TextBlock x:Name="Tinn" Text="{x:Bind Tinn}"/>
+                        <TextBlock x:Name="TqualRate" Text="{x:Bind TqualRate}"/>
+                        <TextBlock x:Name="TdateS" Text="{x:Bind TdateS}"/>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="12" Grid.Row="0">
+            <AppBarButton Icon="Filter" Label="Filter by">
+                <AppBarButton.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem x:Name="rankLow" Text="Rank &lt; 50" />
+                        <MenuFlyoutItem x:Name="rankHigh" Text="Rank &gt; 50" />
+                        <MenuFlyoutSeparator />
+                        <MenuFlyoutItem x:Name="heightLow" Text="Height &lt; 8000ft" />
+                        <MenuFlyoutItem x:Name="heightHigh" Text="Height &gt; 8000ft" />
+                        <MenuFlyoutSeparator />
+                        <MenuFlyoutItem x:Name="clearFilter" Text="Remove Filter" />
+                    </MenuFlyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+            <AppBarButton x:Name="sortButton" Icon="List" Label="Сортировать по" Width="100">
+                <AppBarButton.Flyout>
+                    <MenuFlyout>
+                        <RadioMenuFlyoutItem x:Name="priceSort" Text="По цене" />
+                        <RadioMenuFlyoutItem x:Name="numSort" Text="По количеству на складе" />
+                        <RadioMenuFlyoutItem x:Name="minNumSort" Text="По минимальному количеству" />
+                        <RadioMenuFlyoutItem x:Name="packNumSort" Text="По количеству в упаковке" />
+                        <RadioMenuFlyoutItem x:Name="rateSort" Text="По рейтингу качества" />
+                        <MenuFlyoutSeparator />
+                        <RadioMenuFlyoutItem x:Name="ascSort" Text="По возрастанию" />
+                        <RadioMenuFlyoutItem x:Name="desSort" Text="По убыванию" />
+                        
+                    </MenuFlyout>
+                    
+                </AppBarButton.Flyout>
+                <AutoSuggestBox Height="30" Width="200" VerticalAlignment="Center" QueryIcon="Find"/>
+            </AppBarButton>
+        </StackPanel>
+        <ListView x:Name="DataListView"
+                ItemTemplate="{StaticResource DataViewTemplate}" Padding="0, 0, 10, 0" Grid.Row="1">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView"
+                              VerticalAlignment="Bottom"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+    </Grid>
 </Window>
